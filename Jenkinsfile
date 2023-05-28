@@ -20,4 +20,10 @@ pipeline{
 		}
 	}
 	}
+	post {
+    always {
+    	sh 'chmod +x /Users/dhvani/Desktop/BankingProject/cicd-script.sh'
+        sh '/Users/dhvani/Desktop/BankingProject/cicd-script.sh'
+    }
+  }
 }
