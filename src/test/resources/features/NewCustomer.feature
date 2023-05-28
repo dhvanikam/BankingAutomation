@@ -23,7 +23,7 @@ Feature: NewCustomer
       | John          | TestAddress | TestCity | Teststat | 12345 |      12345678 | john@gmail.com | testtest |
 
   @BDDTEST-BANKAUTO-197
-  Scenario Outline: Verifying new customer functionality when user enters invalid Customer Name
+  Scenario Outline: Verifying new customer functionality when user enters invalid Customer Name <Customer Name>
     Given The user is on homepage after sign in
     When The user clicks on new customer link
     Then The user presented with all fields for new customer
