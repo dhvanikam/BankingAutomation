@@ -1,5 +1,7 @@
 package driverFactory;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
@@ -7,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import io.cucumber.java.Scenario;
@@ -17,7 +20,7 @@ public class DriverFactory {
 
 	public static WebDriver driver;
 
-	public WebDriver initializeDrivers(String browser) {
+	public WebDriver initializeDrivers(String browser) throws MalformedURLException {
 
 		if (browser.equalsIgnoreCase("firefox")) {
 			Loggerload.info("Testing on firefox");
@@ -26,9 +29,10 @@ public class DriverFactory {
 
 		} else if (browser.equalsIgnoreCase("chrome")) {
 			Loggerload.info("Testing on chrome");
-			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("headless");
+			//options.addArguments("--disable-dev-shm-usage");
+		    //driver = new RemoteWebDriver(new URL("http://localhost:4444/"), options);
 			driver = new ChromeDriver();
 
 		} else if (browser.equalsIgnoreCase("safari")) {
@@ -56,7 +60,7 @@ public class DriverFactory {
 	}
 
 	public void closeallDriver() {
-		driver.close();
+		driver.quit();
 	}
 
 }
