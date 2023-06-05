@@ -20,4 +20,23 @@ pipeline{
 		}
 	}
 	}
+	post {
+    always {
+    	sh 'chmod +x /Users/dhvani/Desktop/BankingProject/cicd-script.sh'
+        sh '/Users/dhvani/Desktop/BankingProject/cicd-script.sh'
+    }
+    failure {
+                   publishHTML([
+                       allowMissing: false, 
+                       alwaysLinkToLastBuild: false, 
+                       keepAll: false, 
+                       reportDir: 'target/surefire-reports/', 
+                       reportFiles: 'emailable-report.html', 
+                       reportName: 'HTML Report', 
+                       reportTitles: '', 
+                       useWrapperFileDirectly: true])
+                }
+    
+    
+  }
 }
