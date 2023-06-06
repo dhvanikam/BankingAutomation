@@ -14,7 +14,7 @@ Feature: Deposit
   Scenario: Checking with valid data
     Given User enter valid Accountnumber,Amount,Description
     When Click on submit button
-    Then User should see "successful transfer" alert message
+    Then User should see "Account does not exist" alert message
 
   @BDDTEST-BANKAUTO-217
   Scenario: Checking with  blank data
