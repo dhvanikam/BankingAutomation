@@ -45,18 +45,14 @@ public class ConfigReader {
 
 	}
 
-	public static void setBrowserType(String browser) {
-		browserType = browser;
-	}
-
-	public static String getBrowserType() throws Throwable {
-		String browserType = properties.getProperty("browser");
-		if (browserType != null)
-			return browserType;
+	public static String getBrowserType() {
+		String browser = properties.getProperty("browser");
+		Loggerload.info("Get property BrowserType");
+		if (browser != null)
+			return browser;
 		else
-			throw new RuntimeException("browser not specified in the testng.xml");
+			throw new RuntimeException("browser not specified in the Configuration.properties file.");
 	}
-
 	public static String getApplicationUrl() {
 		String url = properties.getProperty("url");
 		if (url != null)
@@ -107,6 +103,20 @@ public class ConfigReader {
 			throw new RuntimeException("sheetDeposit not specified in the Configuration.properties file.");
 	}
 
-	
+	public static String getnewCustomerPage() {
+		String newCustomerPageUrl = properties.getProperty("newcustomerpage");
+		if (newCustomerPageUrl != null)
+			return newCustomerPageUrl;
+		else
+			throw new RuntimeException("newCustomerPage url not secified in the configuration.properties");
+	}
+
+	public static String getCustomerSheetName() {
+		String sheetname = properties.getProperty("sheetCustomer");
+		if (sheetname != null)
+			return sheetname;
+		else
+			throw new RuntimeException("sheet Customer not specified in the Configuration.properties file.");
+	}
 
 }
