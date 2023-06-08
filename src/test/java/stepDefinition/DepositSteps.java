@@ -33,10 +33,10 @@ public class DepositSteps {
 		this.scenario = scenario;
 	}
 
-	@Before
-	public void initializeDataTable(Scenario scenario) throws Exception {
-		this.scenario = scenario;
-	}
+//	@Before
+//	public void initializeDataTable(Scenario scenario) throws Exception {
+//		this.scenario = scenario;
+//	}
 
 	@Given("User enter valid Accountnumber,Amount,Description")
 	public void user_enter_valid_accountnumber_amount_description() throws Exception {
