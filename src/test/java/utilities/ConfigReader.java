@@ -107,6 +107,13 @@ public class ConfigReader {
 			throw new RuntimeException("sheetDeposit not specified in the Configuration.properties file.");
 	}
 
-	
+	public static String getLoginSheetName() {
+		String sheetname = properties.getProperty("loginSheet");
+		if (sheetname != null)
+			return sheetname;
+		else
+			throw new RuntimeException("Login Sheet not specified in the Configuration.properties file.");
+	}
+
 
 }
