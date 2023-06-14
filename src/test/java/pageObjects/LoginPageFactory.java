@@ -29,11 +29,11 @@ public class LoginPageFactory {
 	String LoginPage = ConfigReader.getApplicationUrl();
 	Actions actions = new Actions(driver);
 
-	@FindBy(name="uid")
+	@FindBy(xpath="//input[@onkeyup='validateuserid();']")
 	@CacheLookup
 	WebElement userID;
 	
-	@FindBy(name="password")
+	@FindBy(xpath="//input[@onkeyup='validatepassword();']")
 	@CacheLookup
 	WebElement passwd;
 	
@@ -63,11 +63,11 @@ public class LoginPageFactory {
 	    }
 	
 	public void enterUserID(String Username) {
-		userID.sendKeys(Username);
+		userID.sendKeys(Username,Keys.TAB);
 	}
 	
 	public void enterPasswd(String Password) {
-		userID.sendKeys(Password);
+		passwd.sendKeys(Password, Keys.TAB);
 	}
 	
 	public void loginBtnclick() {
@@ -94,15 +94,23 @@ public class LoginPageFactory {
 	}
 	
 	public void clickPasswordField() {
-		
-		actions.contextClick(passwd);
-		actions.sendKeys(Keys.TAB);
+         passwd.click();
+		//actions.contextClick(passwd);
+		actions.sendKeys(passwd, Keys.TAB).perform();
 	}
 	
 	public void clickUserNameField() {
-		
-		actions.contextClick(userID);
-		actions.sendKeys(Keys.TAB);
+		userID.click();
+		//actions.contextClick(userID);
+		actions.sendKeys(userID, Keys.TAB).perform();
 	}
 	
+	public String emptyUserId() {
+
+		return userID.getText();
+	}
+	
+	public String emptyPassword() {
+		return passwd.getText();
+	}
 }

@@ -53,6 +53,7 @@ public class DriverFactory {
 		}
 		// Set Page load timeout
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
 		driver.manage().window().maximize();
 
