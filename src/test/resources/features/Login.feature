@@ -10,6 +10,14 @@ Feature: Login Functionality
     And User clicks on the Login button
     Then Error message alert is displayed
     And User stays on the Login page after closing the error alert
+    
+  @BDDTEST-BANKAUTO-255
+  Scenario: Validate the login with invalid data using excel sheet
+  	Given User navigates to the login page of the bank application
+    When User enter below invalid UserID and Password details mentioned in excel sheet
+    And User clicks on the Login button
+    Then Error message alert is displayed
+    And User stays on the Login page after closing the error alert
 
   @BDDTEST-BANKAUTO-204
   Scenario Outline: Validate the behavior with empty Password field
@@ -60,6 +68,7 @@ Feature: Login Functionality
         Examples: 
       | Username   | Password |
       | mngr507972 | vubYbUt  |
+      
     
   @BDDTEST-BANKAUTO-201
   Scenario Outline: Validate the Login functionality with valid data

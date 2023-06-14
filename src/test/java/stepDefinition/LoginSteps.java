@@ -5,11 +5,11 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
 import driverFactory.DriverFactory;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 import pageObjects.LoginPageFactory;
 import utilities.ConfigReader;
@@ -20,6 +20,7 @@ public class LoginSteps {
 	LoginPageFactory loginPage = new LoginPageFactory(driver);
 	String loginPageurl = ConfigReader.getApplicationUrl();
 	Logger logger = LogManager.getLogger();
+	Scenario scenario;
 	
 
 	@Given("User navigates to the login page of the bank application")
@@ -103,6 +104,12 @@ public class LoginSteps {
       logger.info("UserID field is left blank");
       loginPage.clickUserNameField();
       System.out.println("Leave UserID field blank");
+	}
+	
+	@When("User enter below invalid UserID and Password details mentioned in excel sheet")
+	public void User_enter_below_invalid_UserID_and_Password_details_mentioned_in_excel_sheet() throws Exception{
+		loginPage.readExcelData(scenario);
+	    System.out.println("Reading invalid data from excel sheet done");
 	}
 
 	@Then("Error message for UserID field is displayed")
