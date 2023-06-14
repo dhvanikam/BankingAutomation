@@ -9,6 +9,7 @@ import org.testng.Assert;
 
 import driverFactory.DriverFactory;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 import pageObjects.LoginPageFactory;
@@ -22,7 +23,11 @@ public class LoginSteps {
 	Logger logger = LogManager.getLogger();
 	Scenario scenario;
 	
-
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
+	
 	@Given("User navigates to the login page of the bank application")
 	public void user_navigates_to_the_login_page_of_the_bank_application() {
 		driver.get(loginPageurl);
