@@ -27,8 +27,13 @@ public class LoginPageFactory {
 	
 	WebDriver driver = DriverFactory.getdriver();
 	String LoginPage = ConfigReader.getApplicationUrl();
+	String loginPageLanding = ConfigReader.getLoginPage();
 	Actions actions = new Actions(driver);
-
+	String path = ConfigReader.getexcelfilepath();
+	String sheetName = ConfigReader.getDepositSheetName();
+	ExcelReader excelReaderUtil = new ExcelReader();
+	
+	
 	@FindBy(xpath="//input[@onkeyup='validateuserid();']")
 	@CacheLookup
 	WebElement userID;
@@ -61,6 +66,18 @@ public class LoginPageFactory {
 		this.driver = d;
 		PageFactory.initElements(d, this);
 	    }
+	
+	public void readExcelData(Scenario scenario) throws Exception {
+		excelReaderUtil.readSheet(path, "Login");
+		System.out.println("This is scenario name from Excel sheet" +scenario.getName());
+		driver.get(loginPageLanding);
+		String excelUserID = excelReaderUtil.getDataFromExcel(scenario.getName(), "UserID");
+		String excelPassword = excelReaderUtil.getDataFromExcel(scenario.getName(), "Password");
+		System.out.println("UserID :"  +excelUserID);
+		System.out.println("Password :" +excelPassword);
+		userID.sendKeys(excelUserID);
+		passwd.sendKeys(excelPassword);
+	}
 	
 	public void enterUserID(String Username) {
 		userID.sendKeys(Username,Keys.TAB);
