@@ -4,15 +4,16 @@ Feature: Login Functionality
 
   @BDDTEST-BANKAUTO-203
   Scenario: Validate the Login functionality with invalid data using datatable
-    Given User navigates to the login page of the bank application
+  	Given User navigates to the login page of the bank application
     When User enter below invalid details
-      | invalidUser | abcd123 |
-    And Click Login button
+      | invUser | abcd123 |
+    And User clicks on the Login button
     Then Error message alert is displayed
     And User stays on the Login page after closing the error alert
 
   @BDDTEST-BANKAUTO-204
   Scenario Outline: Validate the behavior with empty Password field
+    Given User navigates to the login page of the bank application
     When User enter valid "<Username>" in the UserID field
     And Leave Password field blank
     Then Error message for Password field is displayed
@@ -23,6 +24,7 @@ Feature: Login Functionality
 
   @BDDTEST-BANKAUTO-205
   Scenario Outline: Validate the behavior with empty UserID field
+    Given User navigates to the login page of the bank application
     When Enter valid "<Password>" in the Password field
     And Leave UserID field blank
     Then Error message for UserID field is displayed
@@ -33,6 +35,7 @@ Feature: Login Functionality
 
   @BDDTEST-BANKAUTO-214
   Scenario: Validate the behaviour with empty UserID and Password fields
+    Given User navigates to the login page of the bank application
     When Leave UserID field blank
     And  Leave UserID field blank
     Then Error message for UserID field is displayed
@@ -40,6 +43,7 @@ Feature: Login Functionality
 
   @BDDTEST-BANKAUTO-216
   Scenario: Valid functionality of Login button without login credentials
+    Given User navigates to the login page of the bank application
     And Leaves the UserID and Password fields blank
     When User clicks on the Login button
     Then Error message alert is displayed
@@ -47,6 +51,7 @@ Feature: Login Functionality
 
   @BDDTEST-BANKAUTO-219
   Scenario Outline: Valid the functionality of Reset button
+    Given User navigates to the login page of the bank application
     When User enter valid "<Username>" in the UserID field
     And Enter valid "<Password>" in the Password field
     And Clicks Reset button
@@ -58,9 +63,10 @@ Feature: Login Functionality
     
   @BDDTEST-BANKAUTO-201
   Scenario Outline: Validate the Login functionality with valid data
+    Given User navigates to the login page of the bank application
     When User enter valid "<Username>" in the UserID field
     And Enter valid "<Password>" in the Password field
-    And Click Login button
+    And User clicks on the Login button
     Then User gets logged in to the application successfully
 
     Examples: 
