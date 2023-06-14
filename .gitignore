@@ -3,3 +3,4 @@ allure-results/
 .settings/
 logs
 test-output/
+.DS_Store
