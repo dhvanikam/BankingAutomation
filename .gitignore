@@ -4,3 +4,5 @@ allure-results/
 logs
 test-output/
 .DS_Store
+ExtentReports/
+.classpath
