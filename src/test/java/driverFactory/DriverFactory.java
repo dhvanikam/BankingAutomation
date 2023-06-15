@@ -29,16 +29,16 @@ public class DriverFactory {
 			WebDriverManager.firefoxdriver().setup();
 			FirefoxOptions options = new FirefoxOptions();
 			// options.setCapability(browser, Browser.CHROME);
-			driver = new FirefoxDriver();
-			// driver = new RemoteWebDriver(new URL("http://localhost:4444/"), options);
+			//driver = new FirefoxDriver();
+			driver = new RemoteWebDriver(new URL("http://localhost:4444/"), options);
 
 		} else if (browser.equalsIgnoreCase("chrome")) {
 			Loggerload.info("Testing on chrome");
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments("headless");
+			//options.addArguments("headless");
 			// options.addArguments("--disable-dev-shm-usage");
-			// driver = new RemoteWebDriver(new URL("http://localhost:4444/"), options);
-			driver = new ChromeDriver();
+			 driver = new RemoteWebDriver(new URL("http://localhost:4444/"), options);
+			//driver = new ChromeDriver();
 
 		} else if (browser.equalsIgnoreCase("safari")) {
 			Loggerload.info("Testing on safari");

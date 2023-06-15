@@ -15,7 +15,7 @@ services:
       - SE_NODE_MAX_CONCURRENT_SESSIONS=4
       - SE_NODE_MAX_INSTANCES=40
     ports:
-      - "6900:5900"
+      - "6900-6915:5900"
 
   firefox:
     image: seleniarm/node-firefox
@@ -27,7 +27,7 @@ services:
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
     ports:
-      - "6902:5900"
+      - "6915-6925:5900"
 
   selenium-hub:
     image: selenium/hub:4.9.1-20230508
@@ -35,3 +35,4 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+      

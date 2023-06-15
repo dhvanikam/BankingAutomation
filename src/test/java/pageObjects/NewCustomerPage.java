@@ -35,6 +35,7 @@ public class NewCustomerPage {
 	@FindBy(xpath = "//input[@name='sub']") WebElement btnSubmit;
 	@FindBy(xpath = "//input[@name='res']") WebElement btnReset;
 	@FindBy(id = "picker") WebElement picker;
+	@FindBy(className = "heading3") WebElement successMsg;
 	
 	public NewCustomerPage() {
 		PageFactory.initElements(driver, this);
@@ -66,8 +67,8 @@ public class NewCustomerPage {
 
 	}
 
-	public void getSuccessMessage() {
-		// TODO Auto-generated method stub
+	public String getSuccessMessage() {
+		return successMsg.getText();
 
 	}
 
