@@ -49,6 +49,7 @@ stages {
 	    }
 	}
 	post {
+	
     always {
     	cucumber buildStatus: 'null', 
     	customCssFiles: '', 
@@ -62,7 +63,8 @@ stages {
     	skippedStepsNumber: -1, 
     	sortingMethod: 'ALPHABETICAL', 
     	undefinedStepsNumber: -1
-   
+   		
+   		sh 'docker compose -f docker-compose-v2.yml down --remove-orphans -v'
   }
   success {
     	sh 'chmod +x ./src/test/resources/cicdShellScript/cicd-script.sh'
