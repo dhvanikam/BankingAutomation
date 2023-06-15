@@ -50,7 +50,8 @@ public class LoginPageFactory {
 	@CacheLookup
 	WebElement resetBtn;
 	
-	@FindBy(xpath = "//h2[text()='Guru99 Bank']")
+	//@FindBy(xpath = "//h2[text()='Guru99 Bank']")
+	@FindBy(xpath="//h2[@class='barone']")
     @CacheLookup
     WebElement pageHeading;
 	
