@@ -1,24 +1,56 @@
 pipeline{
 	agent any
 	
-	stages{
+stages {
+    stage("verify tooling") {
+      steps {
+        sh '''
+          docker version
+          docker info
+          docker compose version 
+        '''
+        }
+    }
+    
+  
+   stage('Clean running container') {
+      steps {
+        sh 'docker system prune -a --volumes -f'
+      }
+    }
+    
+    stage('Start container') {
+        steps {
+            retry(3){
+             sh 'docker-compose -f docker-compose-v2.yml up --scale chrome=5 --scale firefox=5'
+             sh 'docker compose ps'
+            }
+            timeout(time: 5, unit: 'MINUTES') {
+                    echo 'timeout'
+                }
+           
+
+            }
+        }
+    
+    
 	stage('Compile Stage'){
 	
-	steps{
-		withMaven(maven:'MyMaven'){
-			sh 'mvn clean compile'
-			}
-		}
-	}
+	    steps{
+	    	withMaven(maven:'MyMaven'){
+		    	sh 'mvn clean compile'
+		    	}
+		    }
+	    }
 	
 	stage('Testing Stage'){
 	
-	steps{
-		withMaven(maven:'MyMaven'){
-			sh 'mvn test'
-			}
-		}
-	}
+	    steps{
+	    	withMaven(maven:'MyMaven'){
+		    	sh 'mvn test'
+		    	}
+		    }
+	    }
 	}
 	post {
     always {
@@ -41,6 +73,5 @@ pipeline{
         sh './src/test/resources/cicdShellScript/cicd-script.sh'
         }
    
-    
   }
-}
+  }
