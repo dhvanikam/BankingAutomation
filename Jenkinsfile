@@ -29,7 +29,12 @@ stages {
             }
         }
     
-    
+    stage('wait for container to start')
+		{
+		    steps {
+   			sh 'sleep 30'
+		    }
+		}
 	stage('Compile Stage'){
 	
 	    steps{
@@ -40,14 +45,27 @@ stages {
 	    }
 	
 	stage('Testing Stage'){
-	
-	    steps{
-	    	withMaven(maven:'MyMaven'){
-		    	sh 'mvn test'
+	    parallel {
+	       stage('Test with chrome'){
+	        steps{
+	    	    withMaven(maven:'MyMaven'){
+		    	sh 'mvn test -Dbrowser=chrome'
 		    	}
 		    }
+		    
+	       }
+	       
+	       stage('Test with firefox'){
+	        steps{
+	    	    withMaven(maven:'MyMaven'){
+		    	sh ' mvn test -Dbrowser=firefox'
+		    	}
+		    }
+		    
+	       }
 	    }
 	}
+}
 	post {
 	
     always {
@@ -73,3 +91,4 @@ stages {
    
   }
   }
+  
