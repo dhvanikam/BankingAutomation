@@ -21,11 +21,11 @@ stages {
     
     stage('Start container') {
         steps {
-            retry(3){
-             sh 'docker-compose -f docker-compose-v2.yml up --scale chrome=5 --scale firefox=5'
+            retry(2){
+             sh 'docker-compose -f docker-compose-v2.yml up --scale chrome=2 --scale firefox=2'
              sh 'docker compose ps'
             }
-            timeout(time: 5, unit: 'MINUTES') {
+            timeout(time: 3, unit: 'MINUTES') {
                     echo 'timeout'
                 }
            
