@@ -22,23 +22,23 @@ pipeline{
 	}
 	post {
     always {
-    	sh 'chmod +x ./src/test/resources/cicdShellScript/cicd-script.sh'
-        sh './src/test/resources/cicdShellScript/cicd-script.sh'
-    }
-   always {
-    cucumber buildStatus: 'null', 
-    customCssFiles: '', 
-    customJsFiles: '', 
-    failedFeaturesNumber: -1, 
-    failedScenariosNumber: -1, 
-    failedStepsNumber: -1, 
-    fileIncludePattern: '**/*.json', 
-    pendingStepsNumber: -1, 
-    skippedStepsNumber: -1, 
-    sortingMethod: 'ALPHABETICAL', 
-    undefinedStepsNumber: -1
+    	cucumber buildStatus: 'null', 
+    	customCssFiles: '', 
+   	 	customJsFiles: '', 
+    	failedFeaturesNumber: -1, 
+    	failedScenariosNumber: -1, 
+    	failedStepsNumber: -1, 
+    	fileIncludePattern: '**/*.json', 
+    	pendingStepsNumber: -1, 
+    	skippedStepsNumber: -1, 
+    	sortingMethod: 'ALPHABETICAL', 
+    	undefinedStepsNumber: -1
    
   }
+  success {
+    	sh 'chmod +x ./src/test/resources/cicdShellScript/cicd-script.sh'
+        sh './src/test/resources/cicdShellScript/cicd-script.sh'
+        }
    
     
   }
