@@ -29,13 +29,14 @@ pipeline{
     	failedScenariosNumber: -1, 
     	failedStepsNumber: -1, 
     	fileIncludePattern: '**/*.json', 
+    	jsonReportDirectory: 'target',
     	pendingStepsNumber: -1, 
     	skippedStepsNumber: -1, 
     	sortingMethod: 'ALPHABETICAL', 
     	undefinedStepsNumber: -1
    
   }
-  success {
+  failure {
     	sh 'chmod +x ./src/test/resources/cicdShellScript/cicd-script.sh'
         sh './src/test/resources/cicdShellScript/cicd-script.sh'
         }
