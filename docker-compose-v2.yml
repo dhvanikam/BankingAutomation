@@ -30,7 +30,7 @@ services:
       - "6915-6925:5900"
 
   selenium-hub:
-    image: selenium/hub:4.9.1-20230508
+    image: seleniarm/hub
     ports:
       - "4442:4442"
       - "4443:4443"
