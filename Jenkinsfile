@@ -22,14 +22,10 @@ stages {
     stage('Start container') {
         steps {
             retry(2){
-             sh 'docker-compose -f docker-compose-v2.yml up --scale chrome=2 --scale firefox=2'
-             sh 'docker compose ps'
+             sh 'docker-compose -f docker-compose-v2.yml up -d --scale chrome=2 --scale firefox=2'
+             sh 'docker compose -f docker-compose-v2.yml ps'
             }
-            timeout(time: 3, unit: 'MINUTES') {
-                    echo 'timeout'
-                }
-           
-
+            
             }
         }
     
@@ -68,7 +64,7 @@ stages {
     	undefinedStepsNumber: -1
    
   }
-  failure {
+  success {
     	sh 'chmod +x ./src/test/resources/cicdShellScript/cicd-script.sh'
         sh './src/test/resources/cicdShellScript/cicd-script.sh'
         }
