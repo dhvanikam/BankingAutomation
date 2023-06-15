@@ -22,21 +22,24 @@ pipeline{
 	}
 	post {
     always {
-    	sh 'chmod +x /Users/dhvani/Desktop/BankingProject/cicd-script.sh'
-        sh '/Users/dhvani/Desktop/BankingProject/cicd-script.sh'
+    	sh 'chmod +x ./src/test/resources/cicdShellScript/cicd-script.sh'
+        sh './src/test/resources/cicdShellScript/cicd-script.sh'
     }
-    failure {
-                   publishHTML([
-                       allowMissing: false, 
-                       alwaysLinkToLastBuild: false, 
-                       keepAll: false, 
-                       reportDir: 'target/surefire-reports/', 
-                       reportFiles: 'emailable-report.html', 
-                       reportName: 'HTML Report', 
-                       reportTitles: '', 
-                       useWrapperFileDirectly: true])
-                }
-    
+   always {
+    cucumber buildStatus: 'null', 
+    customCssFiles: '', 
+    customJsFiles: '', 
+    failedFeaturesNumber: -1, 
+    failedScenariosNumber: -1, 
+    failedStepsNumber: -1, 
+    fileIncludePattern: '**/*.json', 
+    pendingStepsNumber: -1, 
+    skippedStepsNumber: -1, 
+    sortingMethod: 'ALPHABETICAL', 
+    undefinedStepsNumber: -1
+   
+  }
+   
     
   }
 }
