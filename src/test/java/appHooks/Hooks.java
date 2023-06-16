@@ -27,8 +27,8 @@ public class Hooks {
 		//Get browser Type from config file
 		Loggerload.info("Loading Config file");
 		ConfigReader.loadConfig();
-		String browser = ConfigReader.getBrowserType();
-		
+		//String browser = ConfigReader.getBrowserType();
+		String browser = System.getProperty("browser");
 		//Initialize driver from driver factory
 		driverfactory = new DriverFactory();
 		driver = driverfactory.initializeDrivers(browser);

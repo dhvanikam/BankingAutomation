@@ -20,6 +20,7 @@ public class LoginSteps {
 	WebDriver driver = DriverFactory.getdriver();
 	LoginPageFactory loginPage = new LoginPageFactory(driver);
 	String loginPageurl = ConfigReader.getApplicationUrl();
+	String homePageURL = ConfigReader.getHomePage();
 	Logger logger = LogManager.getLogger();
 	Scenario scenario;
 	
@@ -55,7 +56,9 @@ public class LoginSteps {
 	@Then("User gets logged in to the application successfully")
 	public void user_gets_logged_in_to_the_application_successfully() {
 		logger.info("User is logged in");
-		System.out.println("User gets logged out");
+		String actualHomePage = driver.getCurrentUrl();
+		Assert.assertEquals(actualHomePage, homePageURL);
+		System.out.println("User gets logged in");
 	}
 
 	@When("User enter below invalid details")
