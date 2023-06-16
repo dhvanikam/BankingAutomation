@@ -108,5 +108,8 @@ public class DepositSteps {
 	public void user_enter_special_charater_in_account_no_field() throws Exception {
 		dp.readExcelData(scenario);
 	}
-
+	@Given("User enter valid {string},{string},{string}")
+	public void user_enter_valid(String accNO, String amnt, String desc) {
+		dp.enterDepositData(accNO, amnt, desc);
+	}
 }
