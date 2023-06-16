@@ -51,3 +51,13 @@ Feature: Deposit
   Scenario: Checking with special character in Account No
     Given User enter special Charater in AccountNO Field
     Then User should be presented "Special characters are not allowed" message
+    
+      @BDDTEST-BANKAUTO-252
+  Scenario Outline: Checking outline with valid data
+    Given User enter valid "<AccountNo>","<Amount>","<Description>"
+    When Click on submit button
+    Then User should see "Account does not exist" alert message
+    
+    Examples:
+      |AccountNo|Amount|Description|
+      | 122823|1000|personal|

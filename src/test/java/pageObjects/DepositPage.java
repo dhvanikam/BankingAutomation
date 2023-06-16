@@ -75,13 +75,27 @@ public class DepositPage {
 		textDescription.sendKeys(description);
 	}
 
+	public void enterDepositData(String accountNo, String amount, String description) {
+
+		driver.get(depositpage);
+		txtAccountNO.sendKeys(accountNo);
+		txtAmount.sendKeys(amount);
+		textDescription.sendKeys(description);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public void clickSubmitButton() throws InterruptedException {
 		Thread.sleep(3000);
 		btnSubmit.click();
 	}
 
 	public void clickAlert() throws InterruptedException {
-		//driver.navigate().refresh();
+		// driver.navigate().refresh();
 		Thread.sleep(3000);
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -108,9 +122,11 @@ public class DepositPage {
 	public void checkLblMsgDescripiton(String expectedMsg) {
 		assertEquals(expectedMsg, lblDescErrorMsg.getText());
 	}
+
 	public void checkLblMsgAmount(String expectedMsg) {
 		assertEquals(expectedMsg, lblAccErrorMsg.getText());
 	}
+
 	public void checkLblMsgAccountNo(String expectedMsg) {
 		assertEquals(expectedMsg, lblAccErrorMsg.getText());
 	}
