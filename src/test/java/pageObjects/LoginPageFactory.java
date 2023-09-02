@@ -68,7 +68,7 @@ public class LoginPageFactory {
 	    }
 	
 	public void readExcelData(Scenario scenario) throws Exception {
-		excelReaderUtil.readSheet(path, "Deposit");
+		excelReaderUtil.readSheet(path, "Login");
 		System.out.println(scenario.getName());
 		driver.get(loginPageLanding);
 		String excelUserID = excelReaderUtil.getDataFromExcel(scenario.getName(), "UserID");
