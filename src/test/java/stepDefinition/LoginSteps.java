@@ -9,6 +9,7 @@ import org.testng.Assert;
 
 import driverFactory.DriverFactory;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.*;
 import pageObjects.LoginPageFactory;
@@ -19,10 +20,15 @@ public class LoginSteps {
 	WebDriver driver = DriverFactory.getdriver();
 	LoginPageFactory loginPage = new LoginPageFactory(driver);
 	String loginPageurl = ConfigReader.getApplicationUrl();
+	String homePageURL = ConfigReader.getHomePage();
 	Logger logger = LogManager.getLogger();
 	Scenario scenario;
 	
-
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
+	
 	@Given("User navigates to the login page of the bank application")
 	public void user_navigates_to_the_login_page_of_the_bank_application() {
 		driver.get(loginPageurl);
@@ -50,7 +56,9 @@ public class LoginSteps {
 	@Then("User gets logged in to the application successfully")
 	public void user_gets_logged_in_to_the_application_successfully() {
 		logger.info("User is logged in");
-		System.out.println("User gets logged out");
+		String actualHomePage = driver.getCurrentUrl();
+		Assert.assertEquals(actualHomePage, homePageURL);
+		System.out.println("User gets logged in");
 	}
 
 	@When("User enter below invalid details")

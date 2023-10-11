@@ -50,7 +50,8 @@ public class LoginPageFactory {
 	@CacheLookup
 	WebElement resetBtn;
 	
-	@FindBy(xpath = "//h2[text()='Guru99 Bank']")
+	//@FindBy(xpath = "//h2[text()='Guru99 Bank']")
+	@FindBy(xpath="//h2[@class='barone']")
     @CacheLookup
     WebElement pageHeading;
 	
@@ -69,7 +70,8 @@ public class LoginPageFactory {
 	
 	public void readExcelData(Scenario scenario) throws Exception {
 		excelReaderUtil.readSheet(path, "Login");
-		System.out.println(scenario.getName());
+		System.out.println("This is scenario name from Excel sheet" +scenario.getName());
+
 		driver.get(loginPageLanding);
 		String excelUserID = excelReaderUtil.getDataFromExcel(scenario.getName(), "UserID");
 		String excelPassword = excelReaderUtil.getDataFromExcel(scenario.getName(), "Password");
