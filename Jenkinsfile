@@ -81,6 +81,8 @@ stages {
     	skippedStepsNumber: -1, 
     	sortingMethod: 'ALPHABETICAL', 
     	undefinedStepsNumber: -1
+    	
+   		allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
    		
    		sh 'docker compose -f docker-compose-v2.yml down --remove-orphans -v'
   }
