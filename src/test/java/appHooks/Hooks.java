@@ -2,9 +2,12 @@ package appHooks;
 
 import java.io.ByteArrayInputStream;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.Parameters;
 
 import driverFactory.DriverFactory;
 import io.cucumber.java.After;
@@ -26,13 +29,15 @@ public class Hooks {
 	public static void before() throws Throwable {
 		//Get browser Type from config file
 		Loggerload.info("Loading Config file");
+		
 		ConfigReader.loadConfig();
-		//String browser = ConfigReader.getBrowserType();
-		String browser = System.getProperty("browser");
+		String browser = ConfigReader.getBrowserType();
+		//String browser = System.getProperty("browser");
 		//Initialize driver from driver factory
 		driverfactory = new DriverFactory();
-		driver = driverfactory.initializeDrivers(browser);
 		Loggerload.info("Initializing driver for : "+browser);
+		driver = driverfactory.initializeDrivers(browser);
+		
 	
 	}
 
@@ -42,6 +47,14 @@ public class Hooks {
 		Loggerload.info(scenario.getSourceTagNames() +" : "+scenario.getName());
 		Loggerload.info("-----------------------------------------------------------------------------------------------");
 		
+		Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
+        String browserName = capabilities.getBrowserName();
+        String browserVersion = capabilities.getBrowserVersion();
+		io.qameta.allure.Allure.addAttachment("Browser Name", browserName);
+        io.qameta.allure.Allure.addAttachment("Browser Version", browserVersion);
+        
+        scenario.attach(browserName, "text/plain", "Browser Name: ");
+        scenario.attach(browserVersion, "text/plain","Browser Version: ");
 	}
 	@AfterStep
 	public void afterstep(Scenario scenario) {
