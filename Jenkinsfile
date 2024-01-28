@@ -52,7 +52,14 @@ pipeline {
 
                     post {
                             always {
-                            allure jdk: '', report: '${WORKSPACE}/test-reports-chrome/allure-report', results: [[path: 'allure-results']]
+                            allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'target/allure-results']],
+                    report: [[path: '${WORKSPACE}/test-reports-chrome/allure-report']]
+                ])
                             }
                     }
                 }
@@ -66,7 +73,14 @@ pipeline {
                     }
                     post {
                             always {
-                            allure jdk: '', report: '${WORKSPACE}/test-reports-firefox/allure-report', results: [[path: 'allure-results']]
+                            allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'target/allure-results']],
+                    report: [[path: '${WORKSPACE}/test-reports-firefox/allure-report']]
+                ])
                             }
                     }
                 }
