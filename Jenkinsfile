@@ -47,10 +47,14 @@ pipeline {
                     steps {
                         withMaven(maven:'MyMaven') {
                             sh 'mvn test -Dbrowser=chrome'
-
-                            allure includeProperties: false, jdk: '', results: [[path: 'allure-results-chrome']]
                         }
                     }
+
+                    post {
+                            always {
+                                     allure includeProperties: false, jdk: '', results: [[path: './chrome/allure-results']]
+                            }
+                     }
                 }
 
                 stage('Test with firefox') {
@@ -58,9 +62,15 @@ pipeline {
                         withMaven(maven:'MyMaven') {
                             sh ' mvn test -Dbrowser=firefox'
 
-                             allure includeProperties: false, jdk: '', results: [[path: 'allure-results-firefox']]
+                           
                         }
                     }
+                     post {
+                            always {
+                                     allure includeProperties: false, jdk: '', results: [[path: './firefox/allure-results']]
+                            }
+                            }
+                     }
                 }
             }
         }
@@ -80,7 +90,7 @@ pipeline {
         sortingMethod: 'ALPHABETICAL',
         undefinedStepsNumber: -1
 
-            //allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+           
 
             sh 'docker compose -f docker-compose-v2.yml down --remove-orphans -v'
         }
