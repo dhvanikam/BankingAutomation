@@ -52,9 +52,9 @@ pipeline {
 
                     post {
                             always {
-                                     allure includeProperties: false, jdk: '', results: [[path: './chrome/allure-results']]
+                            allure includeProperties: false, jdk: '', results: [[path: './chrome/allure-results']]
                             }
-                     }
+                    }
                 }
 
                 stage('Test with firefox') {
@@ -62,19 +62,18 @@ pipeline {
                         withMaven(maven:'MyMaven') {
                             sh ' mvn test -Dbrowser=firefox'
 
-                           
                         }
                     }
-                     post {
+                    post {
                             always {
-                                     allure includeProperties: false, jdk: '', results: [[path: './firefox/allure-results']]
+                            allure includeProperties: false, jdk: '', results: [[path: './firefox/allure-results']]
                             }
-                            }
-                     }
+                    }
                 }
             }
         }
     }
+
     post {
         always {
             cucumber buildStatus: 'null',
@@ -90,7 +89,7 @@ pipeline {
         sortingMethod: 'ALPHABETICAL',
         undefinedStepsNumber: -1
 
-           
+            //allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
 
             sh 'docker compose -f docker-compose-v2.yml down --remove-orphans -v'
         }
