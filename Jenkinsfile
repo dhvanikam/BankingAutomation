@@ -52,7 +52,7 @@ pipeline {
 
                     post {
                             always {
-                            allure includeProperties: false, jdk: '', results: [[path: '${env.JOB_NAME}/allure-results']]
+                            allure jdk: '', report: '${WORKSPACE}/test-reports-chrome/allure-report', results: [[path: 'allure-results']]
                             }
                     }
                 }
@@ -66,7 +66,7 @@ pipeline {
                     }
                     post {
                             always {
-                            allure includeProperties: false, jdk: '', results: [[path: '${env.JOB_NAME}/allure-results']]
+                            allure jdk: '', report: '${WORKSPACE}/test-reports-firefox/allure-report', results: [[path: 'allure-results']]
                             }
                     }
                 }
