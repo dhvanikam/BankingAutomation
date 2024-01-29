@@ -1,6 +1,11 @@
 pipeline {
     agent any
-
+	
+	environment {
+        OPERATING_SYSTEM = sh(script: 'cat /proc/version', returnStdout: true).trim()
+        // Add more environment variables as needed
+    }
+    
     stages {
         stage('verify tooling') {
             steps {
@@ -77,9 +82,19 @@ pipeline {
         sortingMethod: 'ALPHABETICAL',
         undefinedStepsNumber: -1
 
-            allure([includeProperties: false,
+            allure([includeProperties: true,
                         jdk: '',
-                        properties: [],
+                        properties: [
+                            [
+                                key: 'Operating System',
+                                value: OPERATING_SYSTEM
+                            ],
+                            [
+                                key: 'Build Number',
+                                value: {$BUILD_NUMBER}
+                            ]
+                        
+                        ],
                         reportBuildPolicy: 'ALWAYS',
                         results: [
                             [path: 'target/allure-results/chrome'],
