@@ -31,8 +31,8 @@ public class Hooks {
 		Loggerload.info("Loading Config file");
 		
 		ConfigReader.loadConfig();
-		String browser = ConfigReader.getBrowserType();
-		//String browser = System.getProperty("browser");
+//		String browser = ConfigReader.getBrowserType();
+		String browser = System.getProperty("browser");
 		//Initialize driver from driver factory
 		driverfactory = new DriverFactory();
 		Loggerload.info("Initializing driver for : "+browser);
@@ -55,6 +55,9 @@ public class Hooks {
         
         scenario.attach(browserName, "text/plain", "Browser Name: ");
         scenario.attach(browserVersion, "text/plain","Browser Version: ");
+        
+        String currentdir = System.getProperty("user.dir");
+        Loggerload.info(currentdir);
 	}
 	@AfterStep
 	public void afterstep(Scenario scenario) {

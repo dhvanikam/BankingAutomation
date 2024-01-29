@@ -47,21 +47,16 @@ pipeline {
                     steps {
                         withMaven(maven:'MyMaven') {
                             sh 'mvn test -Dbrowser=chrome -Dallure.results.directory=./target/chrome/allure-results'
-                           
                         }
                     }
-
-           
                 }
 
                 stage('Test with firefox') {
                     steps {
                         withMaven(maven:'MyMaven') {
                             sh ' mvn test -Dbrowser=firefox -Dallure.results.directory=./target/firefox/allure-results'
-							
                         }
                     }
-                   
                 }
             }
         }
@@ -82,7 +77,7 @@ pipeline {
         sortingMethod: 'ALPHABETICAL',
         undefinedStepsNumber: -1
 
-		allure([includeProperties: false,
+            allure([includeProperties: false,
                         jdk: '',
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
@@ -93,6 +88,5 @@ pipeline {
                     ])
             sh 'docker compose -f docker-compose-v2.yml down --remove-orphans -v'
         }
-        
     }
 }
