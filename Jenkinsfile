@@ -34,12 +34,10 @@ pipeline {
             steps {
                 sh 'sleep 30'
             }
+            
         }
         
-        environment {
-        OPERATING_SYSTEM = sh(script: 'cat /proc/version', returnStdout: true).trim()
-        // Add more environment variables as needed
-        }
+      
     
         stage('Compile Stage') {
             steps {
@@ -90,7 +88,7 @@ pipeline {
                         properties: [
                             [
                                 key: 'Operating System',
-                                value: OPERATING_SYSTEM
+                                value: sh(script: 'cat /proc/version', returnStdout: true).trim()
                             ],
                             [
                                 key: 'Build Number',
