@@ -23,7 +23,7 @@ pipeline {
         stage('Start container') {
             steps {
                 retry(2) {
-                    sh 'docker-compose -f docker-compose-v2.yml up -d --scale chrome=2 --scale firefox=2'
+                    sh 'docker-compose -f docker-compose-v2.yml up -d --scale chrome=1 --scale firefox=1'
                     sh 'docker compose -f docker-compose-v2.yml ps'
                 }
             }
