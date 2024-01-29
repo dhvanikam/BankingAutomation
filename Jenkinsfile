@@ -46,44 +46,22 @@ pipeline {
                 stage('Test with chrome') {
                     steps {
                         withMaven(maven:'MyMaven') {
-                            sh 'mvn test -Dbrowser=chrome -Dallure.resultsDirectory=target/allure-results/chrome'
+                            sh 'mvn test -Dbrowser=chrome -Dallure.results.directory=./target/chrome/allure-results'
                            
                         }
                     }
 
-                    post {
-                            always {
-                            allure([
-                    includeProperties: false,
-                    jdk: '',
-                    properties: [],
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'target/allure-results']],
-                    report: [[path: '${WORKSPACE}/test-reports-chrome/allure-report']]
-                ])
-                            }
-                    }
+           
                 }
 
                 stage('Test with firefox') {
                     steps {
                         withMaven(maven:'MyMaven') {
-                            sh ' mvn test -Dbrowser=firefox'
-							sh 'allure generate target/allure-results -o ${WORKSPACE}/allure-report'
+                            sh ' mvn test -Dbrowser=firefox -Dallure.results.directory=./target/firefox/allure-results'
+							
                         }
                     }
-                    post {
-                            always {
-                            allure([
-                    includeProperties: false,
-                    jdk: '',
-                    properties: [],
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'target/allure-results']],
-                    report: [[path: '${WORKSPACE}/test-reports-firefox/allure-report']]
-                ])
-                            }
-                    }
+                   
                 }
             }
         }
