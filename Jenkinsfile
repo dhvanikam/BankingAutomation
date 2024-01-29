@@ -1,10 +1,7 @@
 pipeline {
     agent any
 	
-	environment {
-        OPERATING_SYSTEM = sh(script: 'cat /proc/version', returnStdout: true).trim()
-        // Add more environment variables as needed
-    }
+	
     
     stages {
         stage('verify tooling') {
@@ -38,6 +35,12 @@ pipeline {
                 sh 'sleep 30'
             }
         }
+        
+        environment {
+        OPERATING_SYSTEM = sh(script: 'cat /proc/version', returnStdout: true).trim()
+        // Add more environment variables as needed
+        }
+    
         stage('Compile Stage') {
             steps {
                 withMaven(maven:'MyMaven') {
