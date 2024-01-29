@@ -87,6 +87,7 @@ pipeline {
                         ]
                     ])
             sh 'docker compose -f docker-compose-v2.yml down --remove-orphans -v'
+            cleanWs()
         }
     }
 }
