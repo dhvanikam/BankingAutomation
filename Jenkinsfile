@@ -83,19 +83,9 @@ pipeline {
         sortingMethod: 'ALPHABETICAL',
         undefinedStepsNumber: -1
 
-            allure([includeProperties: true,
+            allure([includeProperties: false,
                         jdk: '',
-                        properties: [
-                            [
-                                key: 'Operating System',
-                                value: sh(script: 'cat /proc/version', returnStdout: true).trim()
-                            ],
-                            [
-                                key: 'Build Number',
-                                value: {$BUILD_NUMBER}
-                            ]
-                        
-                        ],
+                        properties: [],
                         reportBuildPolicy: 'ALWAYS',
                         results: [
                             [path: 'target/allure-results/chrome'],
