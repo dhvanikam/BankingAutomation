@@ -47,6 +47,7 @@ pipeline {
                     steps {
                         withMaven(maven:'MyMaven') {
                             sh 'mvn test -Dbrowser=chrome'
+                            sh 'allure serve allure-results'
                         }
                     }
 
@@ -68,6 +69,7 @@ pipeline {
                     steps {
                         withMaven(maven:'MyMaven') {
                             sh ' mvn test -Dbrowser=firefox'
+                            sh 'allure serve allure-results'
 
                         }
                     }
