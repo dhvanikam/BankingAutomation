@@ -46,8 +46,8 @@ pipeline {
                 stage('Test with chrome') {
                     steps {
                         withMaven(maven:'MyMaven') {
-                            sh 'mvn test -Dbrowser=chrome'
-                            sh 'allure serve allure-results'
+                            sh 'mvn test -Dbrowser=chrome -Dallure.resultsDirectory=target/allure-results/chrome'
+                           
                         }
                     }
 
@@ -69,8 +69,7 @@ pipeline {
                     steps {
                         withMaven(maven:'MyMaven') {
                             sh ' mvn test -Dbrowser=firefox'
-                            sh 'allure serve allure-results'
-
+							sh 'allure generate target/allure-results -o ${WORKSPACE}/allure-report'
                         }
                     }
                     post {
@@ -105,12 +104,17 @@ pipeline {
         sortingMethod: 'ALPHABETICAL',
         undefinedStepsNumber: -1
 
-
+		allure([includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [
+                            [path: 'target/allure-results/chrome'],
+                            [path: 'target/allure-results/firefox']
+                        ]
+                    ])
             sh 'docker compose -f docker-compose-v2.yml down --remove-orphans -v'
         }
-        success {
-            sh 'chmod +x ./src/test/resources/cicdShellScript/cicd-script.sh'
-            sh './src/test/resources/cicdShellScript/cicd-script.sh'
-        }
+        
     }
 }
