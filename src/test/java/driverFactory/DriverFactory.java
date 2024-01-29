@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,6 +14,11 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -29,16 +35,17 @@ public class DriverFactory {
 			WebDriverManager.firefoxdriver().setup();
 			FirefoxOptions options = new FirefoxOptions();
 			// options.setCapability(browser, Browser.CHROME);
-			//driver = new FirefoxDriver();
+			// driver = new FirefoxDriver();
 			driver = new RemoteWebDriver(new URL("http://localhost:4444/"), options);
 
 		} else if (browser.equalsIgnoreCase("chrome")) {
 			Loggerload.info("Testing on chrome");
 			ChromeOptions options = new ChromeOptions();
-			//options.addArguments("headless");
+			WebDriverManager.chromedriver().setup();
+			// options.addArguments("headless");
 			// options.addArguments("--disable-dev-shm-usage");
-			 driver = new RemoteWebDriver(new URL("http://localhost:4444/"), options);
-			//driver = new ChromeDriver();
+			driver = new RemoteWebDriver(new URL("http://localhost:4444/"), options);
+			// driver = new ChromeDriver();
 
 		} else if (browser.equalsIgnoreCase("safari")) {
 			Loggerload.info("Testing on safari");

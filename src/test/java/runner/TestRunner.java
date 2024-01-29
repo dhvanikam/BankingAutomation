@@ -1,8 +1,12 @@
 package runner;
 
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
+
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import utilities.ConfigReader;
 
 @CucumberOptions(plugin = { "pretty", "json:target/Report.json",
 		"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:", 
@@ -20,6 +24,13 @@ public class TestRunner extends AbstractTestNGCucumberTests {
 
 		return super.scenarios();
 	}
+	
+//	@BeforeTest
+//	@Parameters({ "browser" })
+//	public void defineBrowser(String browser) throws Throwable {
+//		ConfigReader.setBrowserType(browser);
+//
+//	}
 	
 
 }
