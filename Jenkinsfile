@@ -47,12 +47,20 @@ pipeline {
                     steps {
                         withMaven(maven:'MyMaven') {
                             sh 'mvn test -Dbrowser=chrome'
+                            sh 'allure serve allure-results'
                         }
                     }
 
                     post {
                             always {
-                            allure jdk: '', report: '${WORKSPACE}/test-reports-chrome/allure-report', results: [[path: 'allure-results']]
+                            allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'target/allure-results']],
+                    report: [[path: '${WORKSPACE}/test-reports-chrome/allure-report']]
+                ])
                             }
                     }
                 }
@@ -61,12 +69,20 @@ pipeline {
                     steps {
                         withMaven(maven:'MyMaven') {
                             sh ' mvn test -Dbrowser=firefox'
+                            sh 'allure serve allure-results'
 
                         }
                     }
                     post {
                             always {
-                            allure jdk: '', report: '${WORKSPACE}/test-reports-firefox/allure-report', results: [[path: 'allure-results']]
+                            allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'target/allure-results']],
+                    report: [[path: '${WORKSPACE}/test-reports-firefox/allure-report']]
+                ])
                             }
                     }
                 }
