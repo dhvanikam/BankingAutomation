@@ -70,7 +70,7 @@ pipeline {
         failedFeaturesNumber: -1,
         failedScenariosNumber: -1,
         failedStepsNumber: -1,
-        fileIncludePattern: '**/*.json',
+        fileIncludePattern: 'Report.json',
         jsonReportDirectory: 'target',
         pendingStepsNumber: -1,
         skippedStepsNumber: -1,
