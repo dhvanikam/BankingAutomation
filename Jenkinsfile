@@ -89,8 +89,8 @@ pipeline {
                         properties: [],
                         reportBuildPolicy: 'ALWAYS',
                         results: [
-                            [path: 'target/allure-results/chrome'],
-                            [path: 'target/allure-results/firefox']
+                            [path: 'target/chrome/allure-results'],
+                            [path: 'target/firefox/allure-results']
                         ]
                     ])
             sh 'docker compose -f docker-compose-v2.yml down --remove-orphans -v'
