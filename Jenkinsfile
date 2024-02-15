@@ -1,47 +1,9 @@
 pipeline {
     agent any  
     stages {
-        stage('verify tooling') {
-            steps {
-                sh '''
-          docker version
-          docker info
-          docker compose version
-        '''
-            }
-        }
-
-        stage('Clean running container') {
-            steps {
-                sh 'docker system prune -a --volumes -f'
-            }
-        }
-
-        stage('Start container') {
-            steps {
-                retry(2) {
-                    sh 'docker-compose -f docker-compose-v2.yml up -d --scale chrome=1 --scale firefox=1'
-                    sh 'docker compose -f docker-compose-v2.yml ps'
-                }
-            }
-        }
-
-        stage('wait for container to start')
-        {
-            steps {
-                sh 'sleep 10'
-            }        
-            
-        }
         
          
-        stage('Compile Stage') {
-            steps {
-                withMaven(maven:'MyMaven') {
-                    sh 'mvn clean compile'
-                }
-            }
-        }
+        
 
         stage('Testing Stage') {
             parallel {
