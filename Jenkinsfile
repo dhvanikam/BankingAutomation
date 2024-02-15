@@ -1,8 +1,5 @@
 pipeline {
-    agent any
-	
-	
-    
+    agent any  
     stages {
         stage('verify tooling') {
             steps {
@@ -32,14 +29,12 @@ pipeline {
         stage('wait for container to start')
         {
             steps {
-                sh 'sleep 30'
-            }
-            
+                sh 'sleep 10'
+            }        
             
         }
         
-      
-    
+         
         stage('Compile Stage') {
             steps {
                 withMaven(maven:'MyMaven') {
