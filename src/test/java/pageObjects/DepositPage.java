@@ -17,8 +17,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import driverFactory.DriverFactory;
 import io.cucumber.java.Scenario;
-import io.netty.handler.timeout.TimeoutException;
 import utilities.ConfigReader;
+import utilities.ElementsUtils;
 import utilities.ExcelReader;
 
 public class DepositPage {
@@ -30,6 +30,7 @@ public class DepositPage {
 	String sheetDeposit;
 	Properties properties;
 	String alertMsg;
+	ElementsUtils eleUtil = new ElementsUtils();
 
 	public DepositPage() {
 		PageFactory.initElements(driver, this);
@@ -61,44 +62,53 @@ public class DepositPage {
 	WebElement btnReset;
 
 	public void readExcelData(Scenario scenario) throws Exception {
+		try {
 		excelReaderUtil.readSheet(path, "Deposit");
 		System.out.println(scenario.getName());
 		driver.get(depositpage);
 		String accountNo = excelReaderUtil.getDataFromExcel(scenario.getName(), "AccoutnNo");
 		String amount = excelReaderUtil.getDataFromExcel(scenario.getName(), "Amount");
 		String description = excelReaderUtil.getDataFromExcel(scenario.getName(), "Description");
-		System.out.println("Account no :" + accountNo);
-		System.out.println("Amount :" + amount);
-		System.out.println("Description :" + description);
+		eleUtil.waitForElement(txtAccountNO);
 		txtAccountNO.sendKeys(accountNo);
+		
+		eleUtil.waitForElement(txtAmount);
 		txtAmount.sendKeys(amount);
+		
+		eleUtil.waitForElement(textDescription);
 		textDescription.sendKeys(description);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void enterDepositData(String accountNo, String amount, String description) {
-
+		try {
 		driver.get(depositpage);
+		
 		txtAccountNO.sendKeys(accountNo);
 		txtAmount.sendKeys(amount);
 		textDescription.sendKeys(description);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void clickSubmitButton() throws InterruptedException {
-		Thread.sleep(3000);
+		try {
+		//Thread.sleep(1000);
+			
 		btnSubmit.click();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 	}
 
 	public void clickAlert() throws InterruptedException {
 		// driver.navigate().refresh();
-		Thread.sleep(3000);
+		//Thread.sleep(1000);
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			if (wait.until(ExpectedConditions.alertIsPresent()) == null) {
 				System.out.println("alert was not present");
 			} else {
