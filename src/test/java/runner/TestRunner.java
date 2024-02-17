@@ -12,7 +12,7 @@ import utilities.ConfigReader;
 		"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:", 
 		"rerun:target/rerun.txt"}, // reporting purpose
 		monochrome = false, // console output
-		tags = "", // tags from feature file
+		tags = "@BDDSTORY-BANKAUTO-206", // tags from feature file
 		features = { "src/test/resources/features" }, // location of feature files
 		glue = { "stepDefinition", "appHooks" }) // location of step definition files
 
@@ -25,12 +25,12 @@ public class TestRunner extends AbstractTestNGCucumberTests {
 		return super.scenarios();
 	}
 	
-//	@BeforeTest
-//	@Parameters({ "browser" })
-//	public void defineBrowser(String browser) throws Throwable {
-//		ConfigReader.setBrowserType(browser);
-//
-//	}
+	@BeforeTest
+	@Parameters({ "browser" })
+	public void defineBrowser(String browser) throws Throwable {
+		ConfigReader.setBrowserType(browser);
+
+	}
 	
 
 }
